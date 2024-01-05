@@ -1,3 +1,9 @@
-import { getConnections } from "../lib/nmcli";
+/* eslint-disable no-console */
+import { getConnectionStatus } from "../lib/nmcli";
 
-console.log(getConnections());
+try {
+	const connections = getConnectionStatus();
+	console.dir(connections, { depth: null });
+} catch (err) {
+	console.dir(err, { depth: null });
+}
