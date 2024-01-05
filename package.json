@@ -3,6 +3,7 @@
 	"version": "0.0.0",
 	"description": "A wifi configuration utility for portable Pis",
 	"scripts": {
+		"watcher": "ts-node src/watcher/watcher.ts",
 		"lint": "eslint ./",
 		"format": "prettier ./",
 		"build": "rm -rf ./dist && npm run lint && npm run format && tsc",
@@ -22,12 +23,11 @@
 		"url": "https://github.com/mrpjevans/wifly/issues"
 	},
 	"homepage": "https://github.com/mrpjevans/wifly#readme",
-	"dependencies": {
+	"devDependencies": {
 		"eslint": "^8.56.0",
 		"eslint-config-prettier": "^9.1.0",
-		"prettier": "^3.1.1"
-	},
-	"devDependencies": {
+		"prettier": "^3.1.1",
+		"@types/node": "^20.10.6",
 		"@typescript-eslint/eslint-plugin": "^6.17.0"
 	}
 }
