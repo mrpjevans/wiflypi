@@ -1,0 +1,33 @@
+{
+	"name": "wifly",
+	"version": "0.0.0",
+	"description": "A wifi configuration utility for portable Pis",
+	"scripts": {
+		"lint": "eslint ./",
+		"format": "prettier ./",
+		"build": "rm -rf ./dist && npm run lint && npm run format && tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/mrpjevans/wifly.git"
+	},
+	"keywords": [
+		"raspberrypi",
+		"wifi"
+	],
+	"author": "PJ Evans <pj@mrpjevans.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/mrpjevans/wifly/issues"
+	},
+	"homepage": "https://github.com/mrpjevans/wifly#readme",
+	"dependencies": {
+		"eslint": "^8.56.0",
+		"eslint-config-prettier": "^9.1.0",
+		"prettier": "^3.1.1"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^6.17.0"
+	}
+}
