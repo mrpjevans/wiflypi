@@ -1,0 +1,7 @@
+{
+	"wiredDevice": "eth0",
+	"wifiDevice": "wlan0",
+	"hotspotName": "hotspot",
+	"logLevel": "debug",
+	"logPretty": true
+}

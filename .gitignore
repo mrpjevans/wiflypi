@@ -129,6 +129,9 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# Config overrides
+env.json
+
 # Other
 *.code-workspace
 .vscode
