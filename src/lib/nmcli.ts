@@ -48,3 +48,35 @@ export function startAP(name: string) {
 		`sudo nmcli con modify ${name} 802-11-wireless.mode ap 802-11-wireless.band bg ipv4.method shared && sudo nmcli con up ${name}`,
 	);
 }
+
+type NmcliWifiNetwork = {
+	ssid: string;
+	signal: number;
+	mode: string;
+	security: string[];
+};
+
+export function scanForWifiNetworks(): NmcliWifiNetwork[] {
+	const output = execSync(
+		`nmcli -f ssid,signal,mode,security -t dev wifi list --rescan yes`,
+	).toString();
+
+	const lines = output.split("\n");
+	lines.pop();
+
+	return lines.reduce((acc: NmcliWifiNetwork[], line) => {
+		const fields = line.split(":");
+		if (
+			!acc.find((network) => network.ssid === fields[0]) &&
+			fields[0].trim() !== ""
+		) {
+			acc.push({
+				ssid: fields[0],
+				signal: parseInt(fields[1]),
+				mode: fields[2],
+				security: fields[3].split(" "),
+			});
+		}
+		return acc;
+	}, []);
+}

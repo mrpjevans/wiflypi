@@ -1,8 +1,25 @@
+import * as path from "path";
+
 import Fastify from "fastify";
+import * as fastifyStatic from "@fastify/static";
+import * as fastifyView from "@fastify/view";
+import * as ejs from "ejs";
+
 import { routes } from "./routes";
 
 const fastify = Fastify({
 	logger: true,
+});
+
+fastify.register(fastifyStatic, {
+	root: path.join(__dirname, "static"),
+	prefix: "/static/",
+});
+
+fastify.register(fastifyView, {
+	engine: {
+		ejs,
+	},
 });
 
 fastify.register(routes);

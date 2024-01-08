@@ -1,0 +1,12 @@
+<p>
+	<form method="get" action="/ssids" onSubmit="showWaiting(this)">
+		<button>Start SSID Scan</button>
+	</form>
+	<div style="display:none" id="busy">BUSY!</div>
+</p>
+
+<script>
+function showWaiting(){
+	document.getElementById('busy').style.display = 'block'
+}
+</script>
