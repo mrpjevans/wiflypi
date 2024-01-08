@@ -14,7 +14,7 @@
 	},
 	"rules": {
 		"no-console": "warn",
-		"require-await": "warn",
+		"require-await": 0,
 		"@typescript-eslint/no-unused-vars": [
 			"error",
 			{
