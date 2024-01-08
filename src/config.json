@@ -2,6 +2,8 @@
 	"wiredDevice": "eth0",
 	"wifiDevice": "wlan0",
 	"hotspotName": "hotspot",
+	"hotspotSSID": "hotspot",
+	"hotspotPassword": "password",
 	"logLevel": "debug",
 	"logPretty": true
 }

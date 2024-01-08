@@ -2,7 +2,12 @@ import * as fs from "fs";
 import { pino } from "pino";
 
 import * as defaults from "../config.json";
-import { getConnections, NmcliConnection } from "../lib/nmcli";
+import {
+	getConnections,
+	createWifiConnection,
+	NmcliConnection,
+	startAP,
+} from "../lib/nmcli";
 
 const envFile = `${process.cwd()}/env.json`;
 const config = fs.existsSync(envFile)
@@ -41,18 +46,44 @@ function getConnectionStatus(): ConnectionStatus {
 			connections.find(
 				(connection) => connection.device === config.wifiDevice,
 			) || false,
-		hotspotActive: connections.some((connection) => {
-			connection.name === "hotspot" && connection.device === config.wifiDevice;
-		}),
+		hotspotActive: connections.some(
+			(connection) =>
+				connection.name === config.hotspotName &&
+				connection.device === config.wifiDevice,
+		),
 		hotspotExists: connections.some(
 			(connection) => connection.name === config.hotspotName,
 		),
 	};
 }
 
+// Start
 try {
 	const connections = getConnectionStatus();
-	log.info(connections);
+
+	if (!connections.hotspotExists) {
+		log.info(`Hotspot '${config.hotspotName}' not found, creating...`);
+		createWifiConnection({
+			name: config.hotspotName,
+			device: config.wifiDevice,
+			ssid: config.hotspotSSID,
+			password: config.hotspotPassword,
+		});
+		log.info(`Hotspot '${config.hotspotName}' created`);
+	} else {
+		log.debug(`Hotspot '${config.hotspotName}' found`);
+	}
+
+	if (!connections.wifi) {
+		log.info(`No wifi connection, starting hotspot '${config.hotspotName}'`);
+		startAP(config.hotspotName);
+	} else if (connections.hotspotActive) {
+		log.info(`Hotspot '${config.hotspotName}' active`);
+	} else {
+		log.info(
+			`Wifi connected to '${(connections.wifi as NmcliConnection).name}'`,
+		);
+	}
 } catch (err) {
 	log.error(err.message);
 }
