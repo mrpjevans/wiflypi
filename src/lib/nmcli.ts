@@ -80,3 +80,10 @@ export function scanForWifiNetworks(): NmcliWifiNetwork[] {
 		return acc;
 	}, []);
 }
+
+export function connectToWifi(ssid: string, password: string) {
+	const output = execSync(
+		`sudo nmcli device wifi connect ${ssid} password ${password}`,
+	).toString();
+	return output;
+}

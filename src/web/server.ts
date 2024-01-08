@@ -3,6 +3,7 @@ import * as path from "path";
 import Fastify from "fastify";
 import * as fastifyStatic from "@fastify/static";
 import * as fastifyView from "@fastify/view";
+import * as fastifyForm from "@fastify/formbody";
 import * as ejs from "ejs";
 
 import { routes } from "./routes";
@@ -21,6 +22,8 @@ fastify.register(fastifyView, {
 		ejs,
 	},
 });
+
+fastify.register(fastifyForm);
 
 fastify.register(routes);
 

@@ -1,4 +1,4 @@
-import { scanForWifiNetworks } from "../lib/nmcli";
+import { scanForWifiNetworks, connectToWifi } from "../lib/nmcli";
 
 export async function routes(fastify, _options) {
 	fastify.get("/", async (_request, reply) => {
@@ -12,5 +12,9 @@ export async function routes(fastify, _options) {
 				networks,
 			});
 		}, 2000);
+	});
+	fastify.post("/connect", async (request, _reply) => {
+		const output = connectToWifi(request.body.ssid, request.body.password);
+		return { body: request.body, output };
 	});
 }
