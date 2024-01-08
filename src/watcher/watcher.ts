@@ -1,4 +1,6 @@
 import * as fs from "fs";
+import { execSync } from "child_process";
+
 import { pino } from "pino";
 
 import * as defaults from "../config.json";
@@ -57,6 +59,14 @@ function getConnectionStatus(): ConnectionStatus {
 	};
 }
 
+function startWeb() {
+	execSync("sudo systemctl start wifly_web.service");
+}
+
+// function stopWeb() {
+// 	execSync("sudo systemctl stop wifly_web.service");
+// }
+
 // Start
 try {
 	const connections = getConnectionStatus();
@@ -77,6 +87,7 @@ try {
 	if (!connections.wifi) {
 		log.info(`No wifi connection, starting hotspot '${config.hotspotName}'`);
 		startAP(config.hotspotName);
+		startWeb();
 	} else if (connections.hotspotActive) {
 		log.info(`Hotspot '${config.hotspotName}' active`);
 	} else {
