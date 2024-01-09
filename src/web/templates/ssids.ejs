@@ -5,17 +5,7 @@
 	<input type="hidden" name="password"/>
 <ul>
 	<% for(network of networks) { %>
-		<li onClick="connect('<%= network.ssid %>')"><%= network.ssid %></li>
+		<li><a href="security?ssid=<%= network.ssid %>"><%= network.ssid %></a></li>
 	<% } %>
 </ul>
 </form>
-
-<script>
-	function connect(ssid) {
-		const password = prompt("Password?");
-		const form = document.getElementById('form');
-		form.ssid.value = ssid;
-		form.password.value = password;
-		form.submit();
-	}
-</script>

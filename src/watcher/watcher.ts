@@ -63,9 +63,9 @@ function startWeb() {
 	execSync("sudo systemctl start wifly_web.service");
 }
 
-// function stopWeb() {
-// 	execSync("sudo systemctl stop wifly_web.service");
-// }
+function stopWeb() {
+	execSync("sudo systemctl stop wifly_web.service");
+}
 
 // Start
 try {
@@ -96,6 +96,7 @@ try {
 		log.info(
 			`Wifi connected to '${(connections.wifi as NmcliConnection).name}'`,
 		);
+		stopWeb();
 	}
 } catch (err) {
 	log.error(err.message);

@@ -24,6 +24,10 @@ export function getConnections(): NmcliConnection[] {
 	});
 }
 
+export function deleteConnection(name: string) {
+	execSync(`sudo nmcli con del id ${name}`);
+}
+
 export type NmcliWifiConnection = {
 	name: string;
 	device: string;
