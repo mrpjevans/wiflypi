@@ -1,5 +1,6 @@
+import { execSync } from "child_process";
 import {
-	scanForWifiNetworks,
+	scanForWifiNetworksWithIw,
 	connectToWifi,
 	deleteConnection,
 } from "../lib/nmcli";
@@ -11,7 +12,7 @@ export async function routes(fastify, _options) {
 
 	fastify.get("/ssids", (_request, reply) => {
 		setTimeout(() => {
-			const networks = scanForWifiNetworks();
+			const networks = scanForWifiNetworksWithIw("wlan0");
 			return reply.view("src/web/templates/root.ejs", {
 				page: "ssids",
 				networks,
@@ -34,8 +35,11 @@ export async function routes(fastify, _options) {
 	});
 
 	fastify.post("/connect", async (request, _reply) => {
-		deleteConnection(request.body.ssid);
-		const output = connectToWifi(request.body.ssid, request.body.password);
-		return { body: request.body, output };
+		try {
+			deleteConnection(request.body.ssid);
+		} catch (err) {}
+		connectToWifi(request.body.ssid, request.body.password);
+		execSync("sudo systemctl stop wifly_web.service");
+		return;
 	});
 }

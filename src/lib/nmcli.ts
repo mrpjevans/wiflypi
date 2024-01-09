@@ -85,6 +85,25 @@ export function scanForWifiNetworks(): NmcliWifiNetwork[] {
 	}, []);
 }
 
+// Currently nmcli cannot scan for networks when in AP mode
+export function scanForWifiNetworksWithIw(device: string): string[] {
+	const output = execSync(
+		`sudo iw dev ${device} scan ap-force | grep SSID`,
+	).toString();
+
+	const lines = output.split("\n");
+
+	return lines.reduce((acc: string[], line) => {
+		const fields = line.split(":");
+		if (fields.length < 2) return acc;
+		const ssid = fields[1].trim();
+		if (!acc.find((network) => network === ssid) && ssid !== "") {
+			acc.push(ssid);
+		}
+		return acc;
+	}, []);
+}
+
 export function connectToWifi(ssid: string, password: string) {
 	const output = execSync(
 		`sudo nmcli device wifi connect ${ssid} password ${password}`,

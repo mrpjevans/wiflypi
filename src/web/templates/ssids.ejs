@@ -5,7 +5,7 @@
 	<input type="hidden" name="password"/>
 <ul>
 	<% for(network of networks) { %>
-		<li><a href="security?ssid=<%= network.ssid %>"><%= network.ssid %></a></li>
+		<li><a href="security?ssid=<%= network %>"><%= network %></a></li>
 	<% } %>
 </ul>
 </form>
