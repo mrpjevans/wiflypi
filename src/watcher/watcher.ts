@@ -11,7 +11,7 @@ import {
 	startAP,
 } from "../lib/nmcli";
 
-const envFile = `${process.cwd()}/env.json`;
+const envFile = `${__dirname}/../env.json`;
 const config = fs.existsSync(envFile)
 	? { ...defaults, ...JSON.parse(fs.readFileSync(envFile, "utf-8")) }
 	: defaults;
@@ -62,10 +62,6 @@ function getConnectionStatus(): ConnectionStatus {
 function startWeb() {
 	execSync("sudo systemctl start wifly_web.service");
 }
-
-// function stopWeb() {
-// 	execSync("sudo systemctl stop wifly_web.service");
-// }
 
 // Start
 try {

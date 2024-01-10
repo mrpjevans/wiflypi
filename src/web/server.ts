@@ -21,6 +21,9 @@ fastify.register(fastifyView, {
 	engine: {
 		ejs,
 	},
+	root: `${__dirname}/templates`,
+	layout: "root",
+	includeViewExtension: true,
 });
 
 fastify.register(fastifyForm);

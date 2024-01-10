@@ -7,8 +7,8 @@
 		"web": "ts-node src/web/server.ts --watch",
 		"web:watch": "nodemon src/web/server.ts --watch",
 		"lint": "eslint --ignore-path .gitignore --ext .js,.ts .",
-		"format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts)\"",
-		"build": "rm -rf ./dist && npm run lint && npm run format && tsc",
+		"format": "prettier --ignore-path .gitignore --write \"src/**/*.ts\"",
+		"build": "rm -rf ./dist && npm run lint && npm run format && tsc && cp -r ./src/web/static ./dist/web/ && cp -r ./src/web/templates ./dist/web/",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
