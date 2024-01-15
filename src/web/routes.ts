@@ -1,4 +1,6 @@
 import { execSync } from "child_process";
+
+import { config } from "../config";
 import {
 	scanForWifiNetworksWithIw,
 	connectToWifi,
@@ -12,7 +14,7 @@ export async function routes(fastify, _options) {
 
 	fastify.get("/ssids", (_request, reply) => {
 		setTimeout(() => {
-			const networks = scanForWifiNetworksWithIw("wlan0");
+			const networks = scanForWifiNetworksWithIw(config.wifiDevice);
 			return reply.view("ssids", { networks });
 		}, 2000);
 	});

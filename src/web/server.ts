@@ -6,6 +6,7 @@ import * as fastifyView from "@fastify/view";
 import * as fastifyForm from "@fastify/formbody";
 import * as ejs from "ejs";
 
+import { config } from "../config";
 import { routes } from "./routes";
 
 const fastify = Fastify({
@@ -23,6 +24,7 @@ fastify.register(fastifyView, {
 	},
 	root: `${__dirname}/templates`,
 	layout: "layout",
+	defaultContext: { config },
 	includeViewExtension: true,
 });
 
@@ -38,7 +40,7 @@ fastify.register(routes);
 
 const start = async () => {
 	try {
-		await fastify.listen({ port: 3000, host: "0.0.0.0" });
+		await fastify.listen({ port: config.port, host: "0.0.0.0" });
 	} catch (err) {
 		fastify.log.error(err);
 		process.exit(1);

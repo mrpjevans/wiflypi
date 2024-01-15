@@ -1,20 +1,14 @@
-import * as fs from "fs";
 import { execSync } from "child_process";
 
 import { pino } from "pino";
 
-import * as defaults from "../config.json";
+import { config } from "../config";
 import {
 	getConnections,
 	createWifiConnection,
 	NmcliConnection,
 	startAP,
 } from "../lib/nmcli";
-
-const envFile = `${__dirname}/../env.json`;
-const config = fs.existsSync(envFile)
-	? { ...defaults, ...JSON.parse(fs.readFileSync(envFile, "utf-8")) }
-	: defaults;
 
 const log = pino({
 	...(config.logPretty && {
@@ -95,4 +89,5 @@ try {
 	}
 } catch (err) {
 	log.error(err.message);
+	process.exit(1);
 }
