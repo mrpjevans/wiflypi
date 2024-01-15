@@ -25,12 +25,16 @@ export async function routes(fastify, _options) {
 		return reply.view("confirm", { ssid, password: request.body.password });
 	});
 
-	fastify.post("/connect", async (request, _reply) => {
+	fastify.post("/connect", async (request, reply) => {
 		try {
 			deleteConnection(request.body.ssid);
 		} catch (err) {}
-		connectToWifi(request.body.ssid, request.body.password);
-		execSync("sudo systemctl stop wifly_web.service");
-		return;
+
+		try {
+			connectToWifi(request.body.ssid, request.body.password);
+			execSync("sudo systemctl stop wifly_web.service");
+		} catch (err) {
+			return reply.view("error", { message: err.message });
+		}
 	});
 }

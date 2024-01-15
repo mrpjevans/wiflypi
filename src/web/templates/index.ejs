@@ -4,7 +4,7 @@
 			WiFly helps you get your headless Raspberry Pi on to a new wifi network
 		</p>
 		<div class="alert alert-danger" role="alert">
-			Do not consider this to be secure. Communication is not encrypted.
+			Do not consider this to be secure. HTTP traffic is not encrypted.
 		</div>
 
 		<form method="get" action="/ssids" onSubmit="showWaiting(this)">
@@ -14,7 +14,7 @@
 		</form>
 	</div>
 </div>
-<%- include('./spinner.ejs') %>
+
 <script>
 	function showWaiting() {
 		document.getElementById("busy").style.display = "block";

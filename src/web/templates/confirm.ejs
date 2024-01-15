@@ -1,7 +1,14 @@
 <div class="row">
 	<div class="col-12">
+
 		<h2>Ready to connect</h2>
 
+		<% if (ssid === '' || password === '') { %>
+			<div class="alert alert-danger" role="alert">
+				No network and/or password specified
+			</div>
+		<% } %>
+		
 		<form
 			method="post"
 			action="/connect"
@@ -15,12 +22,12 @@
 			<p>A attempt will be made to connect to '<%= ssid %>'</p>
 
 			<div class="alert alert-danger" role="alert">
-				You will lose connection to this server when you click Connect. If
-				connection to the wifi network fails, the hotspot will reactivate in 2
-				minutes and you can try again.
+				Unless there is an error, you will lose connection to this server when
+				you click Connect. If connection to the wifi network fails, the hotspot
+				will reactivate in 2 minutes and you can try again.
 			</div>
 
-			<button class="btn btn-primary" id="connect">Connect</button>
+			<button class="btn btn-primary" id="connect" <% if (ssid === '' || password === '') { %>disabled<% } %>>Connect</button>
 			<a
 				class="btn btn-secondary"
 				href="ssids"
@@ -31,7 +38,6 @@
 		</form>
 	</div>
 
-	<%- include('./spinner.ejs') %>
 </div>
 
 <script>
