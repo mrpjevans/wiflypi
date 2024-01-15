@@ -135,3 +135,4 @@ env.json
 # Other
 *.code-workspace
 .vscode
+*.service

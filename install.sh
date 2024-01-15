@@ -5,7 +5,7 @@ sudo apt update - y
 sudo apt upgrade - y
 
 # Deps
-sudo apt install git node typescript
+sudo apt install git nodejs
 
 # Get repo
 cd
@@ -17,7 +17,7 @@ npm install
 npm run build
 
 # Create web service
-cat > ~/wiflypi_web.service << EOM
+cat > ./wiflypi_web.service << EOM
 [Unit]
 Description=WiFlyPi Web Server
 
@@ -29,9 +29,10 @@ Restart=on-failure
 WantedBy=multi-user.target
 EOM
 
+sudo mv ./wiflypi_web.service /usr/lib/systemd/wiflypi_web.service
 sudo systemctl enable /usr/lib/systemd/wiflypi_web.service
 
 # Create cron job
-echo "*/2 *	* * *	root	/usr/bin/node $(pwd)/dist/watcher/watcher.js 2>&1" >> /etc/crontab
+sudo sh -c 'echo "*/2 *	* * *	root	/usr/bin/node $(pwd)/dist/watcher/watcher.js 2>&1" >> /etc/crontab'
 
 echo "WiFlyPi installed"
