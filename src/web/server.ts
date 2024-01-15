@@ -22,8 +22,14 @@ fastify.register(fastifyView, {
 		ejs,
 	},
 	root: `${__dirname}/templates`,
-	layout: "root",
+	layout: "layout",
 	includeViewExtension: true,
+});
+
+fastify.addHook("onSend", async (req, reply, _done) => {
+	reply.header("Cache-Control", "no-cache, no-store, must-revalidate");
+	reply.header("Pragma", "no-cache");
+	reply.header("Expires", "0");
 });
 
 fastify.register(fastifyForm);

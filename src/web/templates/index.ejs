@@ -1,12 +1,23 @@
-<p>
-	<form method="get" action="/ssids" onSubmit="showWaiting(this)">
-		<button>Start SSID Scan</button>
-	</form>
-	<div style="display:none" id="busy">BUSY!</div>
-</p>
+<div class="row">
+	<div class="col-12">
+		<p>
+			WiFly helps you get your headless Raspberry Pi on to a new wifi network
+		</p>
+		<div class="alert alert-danger" role="alert">
+			Do not consider this to be secure. Communication is not encrypted.
+		</div>
 
+		<form method="get" action="/ssids" onSubmit="showWaiting(this)">
+			<button id="cta" class="btn btn-primary">
+				Scan for nearby wifi networks
+			</button>
+		</form>
+	</div>
+</div>
+<%- include('./spinner.ejs') %>
 <script>
-function showWaiting(){
-	document.getElementById('busy').style.display = 'block'
-}
+	function showWaiting() {
+		document.getElementById("busy").style.display = "block";
+		document.getElementById("cta").setAttribute("disabled", "true");
+	}
 </script>

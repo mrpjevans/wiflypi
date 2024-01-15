@@ -17,12 +17,12 @@ export async function routes(fastify, _options) {
 		}, 2000);
 	});
 
-	fastify.get("/security", async (request, reply) => {
-		return reply.view("security", { ssid: request.query.ssid });
-	});
-
 	fastify.post("/confirm", async (request, reply) => {
-		return reply.view("confirm", request.body);
+		const ssid =
+			request.body.hidden_ssid !== ""
+				? request.body.hidden_ssid
+				: request.body.ssid;
+		return reply.view("confirm", { ssid, password: request.body.password });
 	});
 
 	fastify.post("/connect", async (request, _reply) => {
