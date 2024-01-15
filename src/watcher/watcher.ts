@@ -54,7 +54,7 @@ function getConnectionStatus(): ConnectionStatus {
 }
 
 function startWeb() {
-	execSync("sudo systemctl start wifly_web.service");
+	execSync("sudo systemctl start wiflypi_web.service");
 }
 
 // Start

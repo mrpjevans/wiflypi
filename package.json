@@ -1,6 +1,6 @@
 {
-	"name": "wifly",
-	"version": "0.0.0",
+	"name": "wiflypi",
+	"version": "1.0.0",
 	"description": "A wifi configuration utility for portable Pis",
 	"scripts": {
 		"watcher": "ts-node src/watcher/watcher.ts",
@@ -13,7 +13,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/mrpjevans/wifly.git"
+		"url": "git+https://github.com/mrpjevans/wiflypi.git"
 	},
 	"keywords": [
 		"raspberrypi",

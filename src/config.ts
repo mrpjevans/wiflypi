@@ -9,7 +9,7 @@ const defaults = {
 	logLevel: "debug",
 	logPretty: true,
 	port: 3000,
-	name: "WiFly",
+	name: "WiFlyPi",
 };
 
 const envFile = `${__dirname}/../env.json`;

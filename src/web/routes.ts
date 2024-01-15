@@ -34,7 +34,7 @@ export async function routes(fastify, _options) {
 
 		try {
 			connectToWifi(request.body.ssid, request.body.password);
-			execSync("sudo systemctl stop wifly_web.service");
+			execSync("sudo systemctl stop wiflypi_web.service");
 		} catch (err) {
 			return reply.view("error", { message: err.message });
 		}
