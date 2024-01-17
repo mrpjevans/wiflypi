@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Get up to date
-sudo apt update - y
-sudo apt upgrade - y
+sudo apt -y update
+sudo apt -y upgrade
 
 # Deps
 sudo apt install git nodejs
