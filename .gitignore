@@ -136,3 +136,4 @@ env.json
 *.code-workspace
 .vscode
 *.service
+.DS_Store
