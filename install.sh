@@ -32,15 +32,12 @@ EOM
 sudo mv ./wiflypi_web.service /usr/lib/systemd/wiflypi_web.service
 sudo systemctl enable /usr/lib/systemd/wiflypi_web.service
 
-# Create cron job
-CRON_JOB="*/2 *	* * *	root	/usr/bin/node $(pwd)/dist/watcher/watcher.js 2>&1"
-
 # Check the current user's crontab for the line
-if cat /etc/crontab | grep -Fxq "$CRON_JOB"; then
+if cat /etc/crontab | grep $(pwd)/dist/watcher/watcher.js; then
     echo "Cron job already exists, skipping"
 else
 		echo "Creating cron job"
-    sudo sh -c 'echo $CRON_JOB >> /etc/crontab'
+    sudo sh -c "echo '*/2 *	* * *	root	/usr/bin/node $(pwd)/dist/watcher/watcher.js 2>&1' >> /etc/crontab"
 fi
 
 echo "WiFlyPi installed"
