@@ -5,7 +5,7 @@ sudo apt -y update
 sudo apt -y upgrade
 
 # Deps
-sudo apt install git nodejs
+sudo apt install git nodejs npm
 
 # Get repo
 cd
