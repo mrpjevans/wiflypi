@@ -81,6 +81,16 @@ You probably do not want to change much, but you absolutely should change the pa
 
 You can also change the name of the service, the default port and the name of the hotspot. See `src/config.ts` for values.
 
+## Changing hotspot name and password
+
+To make these changes, first configure `env.json` as described above and then delete the existing connection by issuing this command:
+
+```
+nmcli con del id hotspot
+```
+
+Within 2 minutes a new hotspot will be configured with the new credentials.
+
 ## Disclaimer
 
 This utility is intended for casual use only. It is not to be considered secure. Although the WiFi hotspot uses WPA encryption, HTTP traffic is unencrypted.
