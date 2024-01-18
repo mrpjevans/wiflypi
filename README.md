@@ -86,7 +86,7 @@ You can also change the name of the service, the default port and the name of th
 To make these changes, first configure `env.json` as described above and then delete the existing connection by issuing this command:
 
 ```
-nmcli con del id hotspot
+sudo nmcli con del id hotspot
 ```
 
 Within 2 minutes a new hotspot will be configured with the new credentials.
